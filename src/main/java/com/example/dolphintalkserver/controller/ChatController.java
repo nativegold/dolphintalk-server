@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RequiredArgsConstructor
 @Controller
-public class ChatWebController {
+public class ChatController {
 
     @GetMapping("/chat/join")
     public ResponseEntity<Void> join() {
