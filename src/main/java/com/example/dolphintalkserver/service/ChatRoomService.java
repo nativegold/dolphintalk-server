@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 @Service
 public class ChatRoomService {
-    Map<String, ChatRoom> chatRooms = new ConcurrentHashMap<>();
+    private final Map<String, ChatRoom> chatRooms = new ConcurrentHashMap<>();
 
     public ChatRoomListResponseDTO findAllRooms() {
         List<ChatRoom> chatRoomList = new ArrayList<>(chatRooms.values());
@@ -27,8 +27,10 @@ public class ChatRoomService {
         chatRooms.remove(request.getRoomId());
     }
 
-    public void createRoom(ChatRoomCreateRequestDTO request) {
+    public String createRoom(ChatRoomCreateRequestDTO request) {
         ChatRoom chatRoom = new ChatRoom(request.getChatRoomName());
         chatRooms.put(chatRoom.getRoomName(), chatRoom);
+
+        return chatRoom.getRoomId();
     }
 }
