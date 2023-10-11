@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ChatService {
-
-    // 응답 메시지 생성
     public MessageResponseDTO sendMessage(MessageRequestDTO request, String senderIp) {
 
+        // 응답 메시지 생성
         return MessageResponseDTO.builder()
                 .sender(request.getSender())
                 .message(request.getMessage())

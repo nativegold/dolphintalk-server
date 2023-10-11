@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>돌핀톡 DolphinTalk</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/js/chatroom-script.js"></script>
     <style>
         body {
@@ -35,10 +35,11 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span id="chatroom-name"><!-- 채팅방 이름 --></span>
-                    <button id="exit-button" class="btn btn-danger btn-sm">나가기</button>
+                    <button id="exit-button" class="btn btn-danger btn-sm">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="card-body" id="chat-box" style="height: 400px; overflow-y: auto;">
-                    <!-- 채팅방 목록 -->
                 </div>
                 <div class="card-footer">
                     <div class="input-group">

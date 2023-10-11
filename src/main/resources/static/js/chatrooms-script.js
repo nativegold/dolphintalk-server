@@ -48,7 +48,7 @@ $(document).ready(function(){
                         const chatRoomId = response.roomId;
 
                         sessionStorage.setItem("nickname", nickname);
-                        window.location.href = `/chat/room/${chatRoomId}`;
+                        window.location.href = `/chatroom.html?chatRoomId=${chatRoomId}`;
                     },
                     error: function(error) {
                         console.error('Error: 채팅방 생성 실패', error);

@@ -7,6 +7,6 @@ $(document).ready(function(){
         sessionStorage.setItem("nickname", nickname);
 
         // 다음 페이지로 이동
-        window.location.href = "/chat/rooms";
+        window.location.href = "/chatrooms.html";
     });
 });

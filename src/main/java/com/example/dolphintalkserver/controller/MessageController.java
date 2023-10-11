@@ -18,11 +18,10 @@ public class MessageController {    // 메시지 전송 관련 컨트롤러
 
     // 해당 채팅방 메시지 전송
     @MessageMapping("/chat/message")
-    public void sendMessage(HttpServletRequest httpServletRequest,
-                        @RequestBody MessageRequestDTO messageRequestDTO) {
-        String senderIp = httpServletRequest.getRemoteAddr();
-        MessageResponseDTO response = chatService.sendMessage(messageRequestDTO, senderIp);
-
+    public void sendMessage(@RequestBody MessageRequestDTO messageRequestDTO) {
+        //String senderIp = httpServletRequest.getRemoteAddr();
+        MessageResponseDTO response = chatService.sendMessage(messageRequestDTO, "1111.2222");
+        System.out.println(messageRequestDTO.getSender());
         sendingOperations.convertAndSend("/topic/chat/room/" + response.getRoomId(), response);
     }
 }
