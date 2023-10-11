@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ChatRoomDeleteRequestDTO {
-    private String roomId;
+public class ChatRoomsRequestDTO {
+    private String nickname;
 }

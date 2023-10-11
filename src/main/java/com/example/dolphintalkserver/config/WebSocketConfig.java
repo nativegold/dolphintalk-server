@@ -9,7 +9,7 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {      // 웹 소켓 설정
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
@@ -19,9 +19,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("").withSockJS();
+        registry.addEndpoint("/ws").withSockJS();
     }
 
+    // 이미지 전송을 위한 메시지 크기 설정
     @Override
     public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
         registration.setMessageSizeLimit(50 * 1024 * 1024);

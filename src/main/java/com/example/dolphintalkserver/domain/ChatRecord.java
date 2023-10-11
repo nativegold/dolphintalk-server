@@ -19,19 +19,19 @@ public class ChatRecord {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    // 채팅방 닉네임
+    // 사용자 닉네임
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
-    // 채팅방 메세지
+    // 사용자 메세지
     @Column(name = "message", nullable = false)
     private String message;
 
-    // IP
+    // 사용자 IP
     @Column(name = "ip", nullable = false)
     private String ip;
 
-    // 메세지 보낸 시간
+    // 사용자 메시지 보낸 시간
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
