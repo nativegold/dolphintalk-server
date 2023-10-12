@@ -1,13 +1,11 @@
-package com.example.dolphintalkserver.dto;
+package com.example.dolphintalkserver.dto.message;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
-public class MessageRequestDTO {
+public class LeaveMessageRequestDTO {
     private String roomId;
     private String sender;
-    private String message;
 }

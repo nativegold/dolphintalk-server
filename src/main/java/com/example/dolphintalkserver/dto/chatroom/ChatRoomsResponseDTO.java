@@ -1,4 +1,4 @@
-package com.example.dolphintalkserver.dto;
+package com.example.dolphintalkserver.dto.chatroom;
 
 import com.example.dolphintalkserver.domain.ChatRoom;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
-public class ChatRoomListResponseDTO {
+public class ChatRoomsResponseDTO {
     List<ChatRoom> chatRooms;
 }

@@ -1,7 +1,7 @@
 package com.example.dolphintalkserver.service;
 
 import com.example.dolphintalkserver.domain.ChatRoom;
-import com.example.dolphintalkserver.dto.*;
+import com.example.dolphintalkserver.dto.chatroom.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,22 +17,17 @@ public class ChatRoomService {
     private final Map<String, ChatRoom> chatRooms = new ConcurrentHashMap<>();
 
     // 채팅방 목록 가져오기 기능
-    public ChatRoomListResponseDTO findAllRooms() {
+    public ChatRoomsResponseDTO findAllRooms() {
         List<ChatRoom> chatRoomList = new ArrayList<>(chatRooms.values());
 
-        return new ChatRoomListResponseDTO(chatRoomList);
+        return new ChatRoomsResponseDTO(chatRoomList);
     }
 
     // 채팅방 정보 가져오기 기능
-    public ChatroomResponseDTO findRoom(String roomId) {
+    public ChatRoomResponseDTO findRoom(String roomId) {
         ChatRoom chatroom = chatRooms.get(roomId);
 
-        return new ChatroomResponseDTO(chatroom.getRoomId(), chatroom.getRoomName());
-    }
-
-    // 채팅방 삭제 기능
-    public void deleteRoom(ChatRoomDeleteRequestDTO request) {
-        chatRooms.remove(request.getRoomId());
+        return new ChatRoomResponseDTO(chatroom.getRoomId(), chatroom.getRoomName());
     }
 
     // 채팅방 생성 기능
@@ -41,5 +36,27 @@ public class ChatRoomService {
         chatRooms.put(chatRoom.getRoomId(), chatRoom);
 
         return new ChatRoomCreateResponseDTO(chatRoom.getRoomId());
+    }
+
+    // 채팅방 삭제 기능
+    private void deleteRoom(String roomId) {
+        chatRooms.remove(roomId);
+    }
+
+    public void addUserToRoom(String roomId) {
+        ChatRoom chatRoom = chatRooms.get(roomId);
+        if (chatRoom != null) {
+            chatRoom.increaseUserCount();
+        }
+    }
+
+    public void removeUserFromRoom(String roomId) {
+        ChatRoom chatRoom = chatRooms.get(roomId);
+        if (chatRoom != null) {
+            chatRoom.decreaseUserCount();
+            if (chatRoom.getUserCount() <= 0) {
+                deleteRoom(roomId);
+            }
+        }
     }
 }
