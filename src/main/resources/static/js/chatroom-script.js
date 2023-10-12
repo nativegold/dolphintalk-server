@@ -14,6 +14,27 @@ $(document).ready(function(){
         window.location.href = `/chatrooms.html`;
     });
 
+    // 채팅방 정보를 가져오는 AJAX 요청
+    $.ajax({
+        url: '/api/room',
+        type: 'GET',
+        data: { 'roomId': chatRoomId },
+        success: function(response) {
+            const roomName = response.roomName;
+
+            if (!roomName) {
+                alert('존재하지 않는 채팅방입니다. 다시 접속해주세요.');
+                window.location.href = `/chatrooms.html`;
+            }
+
+            $('#chatroom-name').text(roomName);
+
+        },
+        error: function(error) {
+            console.error('Error fetching chat room:', error);
+        }
+    });
+
     // SockJS, stomp 클라이언트 생성
     const socket = new SockJS('/ws');
     const stompClient = Stomp.over(socket);
@@ -22,39 +43,62 @@ $(document).ready(function(){
     stompClient.connect({}, function(frame) {
         // 채팅방 웹소켓 구독
         stompClient.subscribe(`/topic/chat/room/${chatRoomId}`, function(response) {
+            console.log(`/topic/chat/room/${chatRoomId}`);
             console.log(response.body);
             var data = JSON.parse(response.body);
-            // 새로운 메시지 HTML 요소 생성
-            var newMessage = $("<div>").addClass("message");
 
-            // 닉네임, IP, 메시지 내용을 요소에 추가
-            $("<span>").addClass("nickname").text(data.sender).appendTo(newMessage);
-            $("<span>").addClass("ip").text(data.senderIp).appendTo(newMessage);
-            $("<p>").addClass("content").text(data.message).appendTo(newMessage);
-
-            // 생성한 메시지 요소를 chat-box에 추가
-            $("#chat-box").append(newMessage);
+            addMessage(data.sender, data.senderIp, data.message);
 
             // 스크롤을 최신 메시지 위치로 이동
             $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
         });
     });
 
-    // 메시지 전송 이벤트
+    // 메시지 전송 버튼 이벤트
     $("#send-button").click(function() {
-        var message = $("#message-input").val();
-        var messageRequestDTO = {
-            "roomId": chatRoomId,
-            "sender": nickname,
-            "message": message,
-        };
-
-        console.log(messageRequestDTO);
-
-        // 메시지 전송
-        stompClient.send("/app/chat/message", {}, JSON.stringify(messageRequestDTO));
-
-        // 메시지 입력창 초기화
-        $("#message-input").val("");
+        sendMessage();
     });
+
+    // 메시지 전송 엔터키 이벤트
+    $("#message-input").on("keyup",function(key){
+        if(key.keyCode===13) {
+            sendMessage();
+        }
+    });
+
+    function addMessage(sender, ip, message) {
+        const chatMessage = `
+            <div class="chat-message mb-3">
+                <div class="d-flex justify-content-between">
+                    <span class="chat-sender">${sender}</span>
+                    <span class="chat-sender-ip">${ip}</span>
+                </div>
+                <div class="chat-content">
+                    ${message}
+                </div>
+            </div>
+        `;
+
+        $('#chat-box').append(chatMessage);
+    }
+
+    function sendMessage() {
+        var message = $("#message-input").val();
+
+        if(message) {
+            var messageRequestDTO = {
+                "roomId": chatRoomId,
+                "sender": nickname,
+                "message": message,
+            };
+
+            console.log(messageRequestDTO);
+
+            // 메시지 전송
+            stompClient.send("/app/chat/message", {}, JSON.stringify(messageRequestDTO));
+
+            // 메시지 입력창 초기화
+            $("#message-input").val("");
+        }
+    }
 });

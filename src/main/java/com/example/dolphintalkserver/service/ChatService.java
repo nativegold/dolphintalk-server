@@ -12,6 +12,7 @@ public class ChatService {
 
         // 응답 메시지 생성
         return MessageResponseDTO.builder()
+                .roomId(request.getRoomId())
                 .sender(request.getSender())
                 .message(request.getMessage())
                 .senderIp(senderIp)

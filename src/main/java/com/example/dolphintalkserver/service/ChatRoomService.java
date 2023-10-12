@@ -1,10 +1,7 @@
 package com.example.dolphintalkserver.service;
 
 import com.example.dolphintalkserver.domain.ChatRoom;
-import com.example.dolphintalkserver.dto.ChatRoomCreateRequestDTO;
-import com.example.dolphintalkserver.dto.ChatRoomCreateResponseDTO;
-import com.example.dolphintalkserver.dto.ChatRoomDeleteRequestDTO;
-import com.example.dolphintalkserver.dto.ChatRoomListResponseDTO;
+import com.example.dolphintalkserver.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +23,13 @@ public class ChatRoomService {
         return new ChatRoomListResponseDTO(chatRoomList);
     }
 
+    // 채팅방 정보 가져오기 기능
+    public ChatroomResponseDTO findRoom(String roomId) {
+        ChatRoom chatroom = chatRooms.get(roomId);
+
+        return new ChatroomResponseDTO(chatroom.getRoomId(), chatroom.getRoomName());
+    }
+
     // 채팅방 삭제 기능
     public void deleteRoom(ChatRoomDeleteRequestDTO request) {
         chatRooms.remove(request.getRoomId());
@@ -33,7 +37,7 @@ public class ChatRoomService {
 
     // 채팅방 생성 기능
     public ChatRoomCreateResponseDTO createRoom(ChatRoomCreateRequestDTO request) {
-        ChatRoom chatRoom = new ChatRoom(request.getChatRoomName());
+        ChatRoom chatRoom = new ChatRoom(request.getRoomName());
         chatRooms.put(chatRoom.getRoomId(), chatRoom);
 
         return new ChatRoomCreateResponseDTO(chatRoom.getRoomId());

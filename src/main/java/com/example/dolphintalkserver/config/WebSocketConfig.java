@@ -19,7 +19,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {      
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").withSockJS();
+        registry.addEndpoint("/ws").addInterceptors(new HttpHandshakeInterceptor()).withSockJS();
     }
 
     // 이미지 전송을 위한 메시지 크기 설정

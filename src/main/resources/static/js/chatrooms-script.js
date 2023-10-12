@@ -9,12 +9,22 @@ $(document).ready(function(){
 
             // HTML 리스트에 채팅방 이름을 추가
             chatRooms.forEach(function(chatRoom) {
-                $('#chat-room-list').append('<li><span>' + chatRoom.roomName + '</span><button>입장</button></li>');
+                $('#chat-room-list').append(`
+                    <li>
+                        <span>${chatRoom.roomName}</span>
+                        <button class="chatroom-join-button" id="${chatRoom.roomId}">입장</button>
+                    </li>
+                `);
             });
         },
         error: function(error) {
             console.error('Error fetching chat rooms:', error);
         }
+    });
+
+    $(document).on('click', '.chatroom-join-button', function() {
+        const chatRoomId = $(this).attr('id');
+        window.location.href = `/chatroom.html?chatRoomId=${chatRoomId}`;
     });
 
     let nickname = sessionStorage.getItem("nickname");
@@ -42,7 +52,7 @@ $(document).ready(function(){
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        'chatRoomName': newChatRoomName
+                        'roomName': newChatRoomName
                     }),
                     success: function(response) {
                         const chatRoomId = response.roomId;
