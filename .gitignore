@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 ### STS ###
+Dockerfile
 *.yml
 application.properties
 .apt_generated
