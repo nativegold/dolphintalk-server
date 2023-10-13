@@ -5,6 +5,7 @@ import com.example.dolphintalkserver.service.ChatService;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -25,7 +26,7 @@ public class MessageController {    // 채팅방 웹소켓 컨트롤러
         String senderIp = Objects.requireNonNull(headerAccessor.getSessionAttributes()).get("ip").toString();
         JoinMessageResponseDTO response = chatService.sendJoinMessage(request, senderIp);
 
-        sendingOperations.convertAndSend("/topic/chat/room/" + response.getRoomId(), response);
+        sendingOperations.convertAndSend("/topic/chat/room/" + request.getRoomId(), response);
     }
 
     // 사용자 채팅방 퇴장

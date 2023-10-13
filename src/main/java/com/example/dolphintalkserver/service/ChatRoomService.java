@@ -39,8 +39,13 @@ public class ChatRoomService {
     }
 
     // 채팅방 삭제 기능
-    private void deleteRoom(String roomId) {
+    public void deleteRoom(String roomId) {
         chatRooms.remove(roomId);
+    }
+
+    // 채팅방 전체 삭제 기능
+    public void deleteAllRoom() {
+        chatRooms.clear();
     }
 
     public void addUserToRoom(String roomId) {

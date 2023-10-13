@@ -3,8 +3,10 @@ package com.example.dolphintalkserver.dto.message;
 import com.example.dolphintalkserver.dto.type.MessageType;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class JoinMessageResponseDTO {
     private String roomId;
     private String sender;

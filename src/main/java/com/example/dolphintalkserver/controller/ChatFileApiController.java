@@ -3,6 +3,7 @@ package com.example.dolphintalkserver.controller;
 import com.example.dolphintalkserver.dto.message.ImageMessageUploadResponseDTO;
 import com.example.dolphintalkserver.service.AmazonS3FileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,6 @@ public class ChatFileApiController {
     public ResponseEntity<ImageMessageUploadResponseDTO> uploadImage(@RequestParam MultipartFile multipartFile) throws IOException {
         ImageMessageUploadResponseDTO response = s3FileService.uploadImage(multipartFile);
 
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
