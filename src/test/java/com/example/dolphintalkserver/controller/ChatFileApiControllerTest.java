@@ -40,7 +40,7 @@ class ChatFileApiControllerTest {
     @DisplayName("uploadImage: 이미지가 정상적으로 업로드되는지 확인한다.")
     @Test
     public void uploadImage() throws Exception {
-        // given
+        // 준비 (Given)
         final String url = "/api/chat/image";
         byte[] testImage = "테스트용 페이크 이미지".getBytes(StandardCharsets.UTF_8);
 
@@ -50,12 +50,12 @@ class ChatFileApiControllerTest {
                 MediaType.IMAGE_JPEG_VALUE, // 테스트 파일 타입
                 testImage // 테스트 파일 데이터
         );
-        // when
+        // 실행 (When)
         final ResultActions result = mockMvc.perform(MockMvcRequestBuilders.multipart(url)
                 .file(multipartFile)
                 .accept(MediaType.APPLICATION_JSON));
 
-        // then
+        // 검증 (Then)
         result
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

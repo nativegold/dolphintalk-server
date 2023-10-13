@@ -51,18 +51,18 @@ class ChatRoomApiControllerTest {
     @DisplayName("createChatRoom: 채팅방 생성에 성공한다.")
     @Test
     public void createChatRoom() throws Exception {
-        // given
+        // 준비 (Given)
         final String url = "/api/room";
         final ChatRoomCreateRequestDTO requestDTO = new ChatRoomCreateRequestDTO("채팅방 생성 테스트");
         String requestJson = objectMapper.writeValueAsString(requestDTO);   // 직렬화
 
-        // when
+        // 실행 (When)
         final ResultActions result = mockMvc.perform(post(url)
                 .content(requestJson)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
-        // then
+        // 검증 (Then)
         result
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -72,11 +72,11 @@ class ChatRoomApiControllerTest {
     @DisplayName("getRoom: 채팅방 조회에 성공한다.")
     @Test
     public void getRoom() throws Exception {
-        // given
+        // 준비 (Given)
         final String url = "/api/room";
         final String roomName = "채팅방 데이터";
 
-        // when
+        // 실행 (When)
         final ChatRoomCreateRequestDTO requestDTO = new ChatRoomCreateRequestDTO(roomName);
         final ChatRoomCreateResponseDTO responseDTO = chatRoomService.createRoom(requestDTO);   // 데이터 생성
         final String roomId = responseDTO.getRoomId();
@@ -85,7 +85,7 @@ class ChatRoomApiControllerTest {
                 .param("roomId", roomId)
                 .accept(MediaType.APPLICATION_JSON));
 
-        // then
+        // 검증 (Then)
         result
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -95,11 +95,11 @@ class ChatRoomApiControllerTest {
     @DisplayName("getRooms: 채팅방 목록 조회에 성공한다.")
     @Test
     public void getRooms() throws Exception {
-        // given
+        // 준비 (Given)
         final String url = "/api/rooms";
         final String roomName = "채팅방 데이터";
 
-        // when
+        // 실행 (When)
         final ChatRoomCreateRequestDTO requestDTO = new ChatRoomCreateRequestDTO(roomName);
         final ChatRoomCreateResponseDTO responseDTO = chatRoomService.createRoom(requestDTO);   // 데이터 생성
         final String roomId = responseDTO.getRoomId();
@@ -107,7 +107,7 @@ class ChatRoomApiControllerTest {
         final ResultActions result = mockMvc.perform(get(url)   // 데이터 가져오기
                 .accept(MediaType.APPLICATION_JSON));
 
-        // then
+        // 검증 (Then)
         result
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
