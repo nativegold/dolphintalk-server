@@ -34,6 +34,20 @@ DolphinTalk은 사용자가 닉네임을 설정하여 다양한 채팅방에 참
     ```bash
     git clone https://github.com/nativegold/dolphintalk-server.git
     ```
+2. **프로젝트 내 환경 변수 설정**
+   - `src/main/resources/application.yml` 파일에서 AWS S3와 관련된 환경 변수를 설정합니다.
+    ```yml
+    aws:
+    s3:
+      bucket: (Enter your AWS S3 bucket)
+    credentials:
+      access-key: (Enter your access key)
+      secret-key: (Enter your secret key)
+    region:
+      static: (Enter your aws region)
+    ```
+2. **애플리케이션 실행 후 브라우저에서 확인**
+   - 애플리케이션을 실행한 후 브라우저에서 `http://localhost:8080/home.html` 으로 접속하여 결과를 확인합니다.
 
 ## 추후 개선 사항 🛠️
 - **값 검증 코드 추가**: 현재는 입력 값의 유효성 검사를 제한적으로 처리하고 있어, 엄격한 값 검증 및 에러 핸들링 로직을 추가하여 애플리케이션의 안정성을 높일 생각입니다.
