@@ -28,7 +28,12 @@ DolphinTalk은 사용자가 닉네임을 설정하여 다양한 채팅방에 참
 ### 사전 요구사항
 - Java 17
 - AWS 계정
-- 
+
+### 로컬에서 실행
+1. **Repository clone**
+    ```bash
+    git clone https://github.com/nativegold/dolphintalk-server.git
+    ```
 
 ## 추후 개선 사항 🛠️
 - **값 검증 코드 추가**: 현재는 입력 값의 유효성 검사를 제한적으로 처리하고 있어, 엄격한 값 검증 및 에러 핸들링 로직을 추가하여 애플리케이션의 안정성을 높일 생각입니다.
