@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+
+  h2:
+    console:
+      enabled: true
+cloud:
+  aws:
+    s3:
+      bucket: (Enter your AWS S3 bucket)
+    credentials:
+      access-key: (Enter your access key)
+      secret-key: (Enter your secret key)
+    region:
+      static: (Enter your aws region)
+      auto: false
+    stack:
+      auto: false
+

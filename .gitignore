@@ -8,7 +8,7 @@ build/
 ### STS ###
 *.tar
 Dockerfile
-*.yml
+application_backup.yml
 application.properties
 .apt_generated
 .classpath
