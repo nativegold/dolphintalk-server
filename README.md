@@ -27,6 +27,8 @@ DolphinTalk은 사용자가 닉네임을 설정하여 다양한 채팅방에 참
 
 ### 사전 요구사항
 - Java 17
+- IntelliJ (추천)
+- Gradle
 - AWS 계정
 
 ### 로컬에서 실행
