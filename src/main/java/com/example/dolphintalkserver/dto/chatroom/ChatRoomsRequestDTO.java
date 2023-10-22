@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ChatRoomsRequestDTO {
+public class ChatRoomsRequestDTO {     // 채팅방 리스트 요청 DTO
     private String nickname;
 }

@@ -11,7 +11,7 @@ public class ChatRoom {     // 채팅방 도메인
     private final String roomId;
     // 채팅방 이름
     private final String roomName;
-    private AtomicInteger userCount = new AtomicInteger(0);
+    private final AtomicInteger userCount = new AtomicInteger(0);
 
     public ChatRoom(String roomName) {
         this.roomId = UUID.randomUUID().toString();

@@ -8,6 +8,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
-public class ChatRoomsResponseDTO {
+public class ChatRoomsResponseDTO {     // 채팅방 리스트 응답 DTO
     List<ChatRoom> chatRooms;
 }
