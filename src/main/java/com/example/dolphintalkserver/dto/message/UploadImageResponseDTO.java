@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ImageMessageUploadResponseDTO {
+public class UploadImageResponseDTO {
     private String imageUrl;
 }

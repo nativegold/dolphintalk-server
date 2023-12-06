@@ -1,8 +1,5 @@
 package com.example.dolphintalkserver.controller;
 
-import com.example.dolphintalkserver.dto.chatroom.ChatRoomCreateRequestDTO;
-import com.example.dolphintalkserver.service.ChatRoomService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
